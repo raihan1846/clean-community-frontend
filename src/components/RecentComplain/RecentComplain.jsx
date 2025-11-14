@@ -1,6 +1,7 @@
 import React from 'react';
 import { BsAlarmFill } from "react-icons/bs";
 import { AiFillBank } from "react-icons/ai";
+import { Link } from 'react-router';
 
 const RecentComplain = () => {
     return (
@@ -184,12 +185,10 @@ const RecentComplain = () => {
                                 </div>
                             </div>
                             <div className="mt-6">
-                                <button className="btn btn-primary btn-block">View Details</button>
+                                <Link className="btn btn-primary btn-block" to="see-details">View Details</Link>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>

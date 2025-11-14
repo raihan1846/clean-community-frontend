@@ -11,6 +11,11 @@ import Home from './components/Home/Home';
 import RecentComplain from './components/RecentComplain/RecentComplain';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import AllIssues from './components/AllIssues/AllIssues';
+import MyIssues from './components/MyIssues/MyIssues';
+import MyContribution from './components/MyContribution/MyContribution';
+import AddIssue from './components/AddIssue/AddIssue';
+import IssueDetails from './components/IssueDetails/IssueDetails';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +41,26 @@ const router = createBrowserRouter([
       {
         path: 'register',
         Component: Register
+      },
+      {
+        path: 'all-issues',
+        Component: AllIssues
+      },
+      {
+        path: 'my-issues',
+        Component: MyIssues
+      },
+      {
+        path: 'my-contribution',
+        Component: MyContribution
+      },
+      {
+        path: 'add-issue',
+        Component: AddIssue
+      },
+      {
+        path: 'see-details',
+        Component: IssueDetails
       }
     ]
   },
