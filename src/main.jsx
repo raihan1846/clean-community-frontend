@@ -9,6 +9,8 @@ import Banner from './components/Banner/Banner';
 import ReportIssue from './components/ReportIssue/ReportIssue';
 import Home from './components/Home/Home';
 import RecentComplain from './components/RecentComplain/RecentComplain';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: 'recentComplain',
         Component: RecentComplain
+      },
+      {
+        path: 'login',
+        Component: Login
+      },
+      {
+        path: 'register',
+        Component: Register
       }
     ]
   },

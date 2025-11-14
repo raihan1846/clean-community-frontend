@@ -37,7 +37,6 @@ const Navbar = () => {
       </div>
     
       <div className="navbar-end">
-        <a className="btn">Button</a>
     
         {/* Avatar Dropdown Added Here */}
         <div className="dropdown dropdown-end ml-2">
