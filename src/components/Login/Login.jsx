@@ -1,17 +1,18 @@
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { auth } from "../../firebase/firebase.init";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 
 const Login = () => {
     const { signInUser, signInWithGoogle } = useContext(AuthContext);
-    const [loading, setLoading] = useState(false);
+    const location = useLocation();
     const navigate = useNavigate();
 
+    const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(null);
-
+     
 
   // Email/password login
   const handleLogin = async (e) => {
@@ -28,7 +29,7 @@ const Login = () => {
             showConfirmButton: false,
             timer: 1500
         });
-        navigate("/"); 
+        navigate(location.state || '/'); 
     } catch (error) {
         Swal.fire({
             icon: "error",
@@ -52,7 +53,7 @@ const handleGoogleSignIn = async () => {
             showConfirmButton: false,
             timer: 1500
         });
-        navigate("/"); 
+        navigate(location.state || '/'); 
     } catch (error) {
         Swal.fire({
             icon: "error",

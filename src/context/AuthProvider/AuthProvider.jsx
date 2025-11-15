@@ -10,16 +10,20 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     const createUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     };
     const signInUser = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password);
     }
     const signInWithGoogle = () => {
+        setLoading(true)
         return signInWithPopup(auth, provider);
     };
 
     const signOutUser = ()=>{
+        setLoading(true)
         return signOut(auth);
     }
     // onAuthStateChanged(auth, (currentUser) => {

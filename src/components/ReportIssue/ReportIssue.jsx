@@ -39,7 +39,7 @@ const ReportIssue = () => {
               <div className="flex flex-col items-center text-center space-y-4">
                 {cat.icon}
                 <h3 className="text-xl font-semibold">{cat.name}</h3>
-                <p classname="text-gray-600 text-sm">
+                <p className="text-gray-600 text-sm">
                   Click to report an issue related to {cat.name}.
                 </p>
               </div>

@@ -1,10 +1,12 @@
 import React, { use } from 'react';
 import { AuthContext } from '../context/AuthContext/AuthContext';
-import { Navigate } from 'react-router';
+import { Navigate, useLocation } from 'react-router';
 import { TailSpin } from 'react-loader-spinner';
 
 const PrivateRoute = ({ children }) => {
     const { user, loading } = use(AuthContext);
+    const loaction = useLocation();
+    console.log(loaction);
     if (loading) {
         return <TailSpin
             height="20"
@@ -18,7 +20,7 @@ const PrivateRoute = ({ children }) => {
     }
 
     return (
-        <Navigate to="/login"></Navigate>
+        <Navigate state={location?.pathname} to="/login"></Navigate>
     );
 };
 
