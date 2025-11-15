@@ -19,6 +19,7 @@ import IssueDetails from './components/IssueDetails/IssueDetails';
 import AuthProvider from './context/AuthProvider/AuthProvider';
 import PrivateRoute from './Routes/PrivateRoute';
 import Profile from './components/Profile/Profile';
+import UpdateIssue from './components/AddIssue/UpdateIssue';
 
 const router = createBrowserRouter([
   {
@@ -61,8 +62,13 @@ const router = createBrowserRouter([
         path: 'add-issue',
         Component: AddIssue
       },
+      ,
       {
-        path: '/see-details/:id',
+        path: 'edit-issue/:id',
+        Component: UpdateIssue
+      },
+      {
+        path: 'see-details/:id',
         Component: IssueDetails
       },
       {

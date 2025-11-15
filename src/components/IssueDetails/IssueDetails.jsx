@@ -1,7 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
 const IssueDetails = () => {
+    const {id} = useParams();
+    const [issue,setIssue] = useState(null);
+
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/all-issues/${id}`)
+            .then(res => res.json())
+            .then(data => setIssue(data))
+            .catch(err => console.error(err));
+    }, [id]);
+
+    if (!issue) return <div>Loading...</div>;
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-6 flex justify-center">
@@ -9,7 +22,7 @@ const IssueDetails = () => {
 
                 {/* Title */}
                 <h1 className="text-4xl font-bold mb-6">
-                    Broken Street Light at Main Road
+                {issue.title}
                 </h1>
 
                 {/* Info Grid */}
@@ -17,22 +30,22 @@ const IssueDetails = () => {
 
                     <div>
                         <p className="text-gray-500">Category</p>
-                        <p className="text-lg font-semibold">Broken Public Property</p>
+                        <p className="text-lg font-semibold">{issue.category}</p>
                     </div>
 
                     <div>
                         <p className="text-gray-500">Location</p>
-                        <p className="text-lg font-semibold">Main Road, Sector 4</p>
+                        <p className="text-lg font-semibold">{issue.location}</p>
                     </div>
 
                     <div>
                         <p className="text-gray-500">Date</p>
-                        <p className="text-lg font-semibold">14 Nov 2025</p>
+                        <p className="text-lg font-semibold">{issue.date}</p>
                     </div>
 
                     <div>
                         <p className="text-gray-500">Suggested Fix Budget</p>
-                        <p className="text-lg font-semibold">₹12,000</p>
+                        <p className="text-lg font-semibold">${issue.amount}</p>
                     </div>
                 </div>
 
@@ -40,16 +53,14 @@ const IssueDetails = () => {
                 <div className="mb-8">
                     <h2 className="text-xl font-semibold mb-1">Description</h2>
                     <p className="text-gray-700 leading-relaxed">
-                        The street light at Sector 4 Main Road has been broken for the last
-                        month. It causes inconvenience and increases risk at night. Needs urgent
-                        repair.
+                    {issue.description}
                     </p>
                 </div>
 
                 {/* Image */}
                 <div className="mb-10">
                     <img
-                        src="https://via.placeholder.com/600x350"
+                        src={issue.image}
                         alt="Issue"
                         className="rounded-xl shadow-md"
                     />

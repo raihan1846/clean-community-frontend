@@ -1,12 +1,13 @@
 import React, { use, useEffect, useState } from 'react';
 import { data, Link } from 'react-router';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
+import Swal from 'sweetalert2';
 
 const MyIssues = () => {
-    const {user} = use(AuthContext);
+    const { user } = use(AuthContext);
     const [issues, setIssues] = useState([]);
 
-   
+
     useEffect(() => {
         if (user?.email) {
             fetch(`http://localhost:3000/all-issues?email=${user.email}`)
@@ -17,27 +18,57 @@ const MyIssues = () => {
                 });
         }
     }, [user?.email]);
-   
+    
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3000/all-issues/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0 || data.success) { // backend response check
+                        Swal.fire(
+                            'Deleted!',
+                            'Your issue has been deleted.',
+                            'success'
+                        );
+                        setIssues(prev => prev.filter(issue => issue._id !== id)); // UI update
+                    }
+                })
+                .catch(err => console.error(err));
+            }
+        });
+    }
+    
 
     return (
         <div>
-           <div className="overflow-x-auto">
-            <table className="table">
-                {/* head */}
-                <thead>
-                    <tr>
-                        <th>Sl No#</th>
-                        <th>Image</th>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Location</th>
-                        <th>Amount</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* row 1 */}
-                    {
+            <div className="overflow-x-auto">
+                <table className="table">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th>Sl No#</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* row 1 */}
+                        {
                             issues.map((issue, index) => (
                                 <tr key={issue._id}>
                                     <th>{index + 1}</th>
@@ -63,7 +94,7 @@ const MyIssues = () => {
                                             Edit
                                         </Link>
 
-                                        <button className='btn bg-red-500'>
+                                        <button onClick={() => handleDelete(issue._id)} className='btn bg-red-500'>
                                             Delete
                                         </button>
                                     </td>
@@ -71,11 +102,11 @@ const MyIssues = () => {
                             ))
                         }
 
-                </tbody>
-            </table>
-        </div>
-        <div className='flex justify-center item-center m-4'>
-            <Link className="btn btn-active btn-primary" to="/add-issue">Add Issue</Link>
+                    </tbody>
+                </table>
+            </div>
+            <div className='flex justify-center item-center m-4'>
+                <Link className="btn btn-active btn-primary" to="/add-issue">Add Issue</Link>
             </div>
 
         </div>
