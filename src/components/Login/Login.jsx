@@ -1,48 +1,103 @@
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import React, { useState } from "react";
-import { Link } from "react-router";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { auth } from "../../firebase/firebase.init";
 import Swal from "sweetalert2";
-const provider = new GoogleAuthProvider();
+import { AuthContext } from "../../context/AuthContext/AuthContext";
 
 const Login = () => {
+    const { signInUser, signInWithGoogle } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
     const [user, setUser] = useState(null);
 
-    const handleGoogleSignIn = e =>{
-    signInWithPopup(auth, provider)
-    .then(result=>{
-     setUser(result.user)
-    }).catch(error=>{
 
-    })
+  // Email/password login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    try {
+        const result = await signInUser(email, password);
+        Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Successfully Logged In",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        navigate("/"); 
+    } catch (error) {
+        Swal.fire({
+            icon: "error",
+            title: "Login Failed",
+            text: error.message,
+        });
+    } finally {
+        setLoading(false);
     }
-    const handleLogin = e =>{
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        // console.log(email,password);
+};
 
-        signInWithEmailAndPassword(auth,email,password)
-        .then((result) =>{
-            console.log(result);
-            Swal.fire({
-                position: "top-center",
-                icon: "success",
-                title: "SuccessFully Loged In",
-                showConfirmButton: false,
-                timer: 1500
-              });
-        }).catch(error=>{
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Why do I have this issue?</a>'
-              });
+// Google login
+const handleGoogleSignIn = async () => {
+    setLoading(true);
+    try {
+        const result = await signInWithGoogle();
+        Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Successfully Logged In with Google",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        navigate("/"); 
+    } catch (error) {
+        Swal.fire({
+            icon: "error",
+            title: "Google Sign-In Failed",
+            text: error.message,
+        });
+    } finally {
+        setLoading(false);
+    }
+};
+    // const handleGoogleSignIn = e =>{
+    // signInWithPopup(auth, provider)
+    // .then(result=>{
+    //  setUser(result.user)
+    // }).catch(error=>{
+
+    // })
+    // }
+    // const handleLogin = e =>{
+    //     e.preventDefault();
+    //     const email = e.target.email.value;
+    //     const password = e.target.password.value;
+    //     // console.log(email,password);
+
+    //     signInWithEmailAndPassword(auth,email,password)
+    //     .then((result) =>{
+    //         console.log(result);
+    //         Swal.fire({
+    //             position: "top-center",
+    //             icon: "success",
+    //             title: "SuccessFully Loged In",
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //           });
+    //     }).catch(error=>{
+    //         Swal.fire({
+    //             icon: "error",
+    //             title: "Oops...",
+    //             text: "Something went wrong!",
+    //             footer: '<a href="#">Why do I have this issue?</a>'
+    //           });
               
-        })
+    //     })
 
-    }
+    // }
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-base-200 to-base-300 px-4">
             <div className="card w-full max-w-sm bg-base-100 shadow-xl border border-base-300">

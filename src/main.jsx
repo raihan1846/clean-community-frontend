@@ -16,6 +16,9 @@ import MyIssues from './components/MyIssues/MyIssues';
 import MyContribution from './components/MyContribution/MyContribution';
 import AddIssue from './components/AddIssue/AddIssue';
 import IssueDetails from './components/IssueDetails/IssueDetails';
+import AuthProvider from './context/AuthProvider/AuthProvider';
+import PrivateRoute from './Routes/PrivateRoute';
+import Profile from './components/Profile/Profile';
 
 const router = createBrowserRouter([
   {
@@ -61,6 +64,12 @@ const router = createBrowserRouter([
       {
         path: 'see-details',
         Component: IssueDetails
+      },
+      {
+        path: 'profile',
+        element: <PrivateRoute>
+          <Profile></Profile>
+        </PrivateRoute>
       }
     ]
   },
@@ -68,6 +77,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+   <AuthProvider>
+     <RouterProvider router={router}></RouterProvider>
+   </AuthProvider>
   </StrictMode>,
 )

@@ -1,20 +1,23 @@
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import React, { useContext, useEffect, useState } from 'react';
-import { NavLink } from 'react-router';
+import React, { use, useContext, useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router';
 import { auth } from '../../firebase/firebase.init';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../context/AuthContext/AuthContext';
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
-    });
-    return () => unsubscribe;
-  }, [])
-  const handleLogOut = e => {
-    signOut(auth).then(() => {
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser)
+  //   });
+  //   return () => unsubscribe;
+  // }, [])
+  
+  const {user, signOutUser} = use(AuthContext);
+const handleLogOut = e => {
+  signOutUser().then(() => {
       Swal.fire({
         position: "top-center",
         icon: "success",
@@ -74,14 +77,14 @@ const Navbar = () => {
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a className="justify-between">
+            { user && <li>
+              <Link className="justify-between" to="/profile">
                 Profile
                 <span className="badge">{user?.displayName}</span>
-              </a>
-            </li>
+              </Link>
+            </li>}
             <li><a>Settings</a></li>
-            <li><a onClick={handleLogOut}>Logout</a></li>
+            { user ? <li><a className='btn' onClick={handleLogOut}>Logout</a></li> : <Link className='btn' to="/login">Login</Link>}
           </ul>
         </div>
       </div>
