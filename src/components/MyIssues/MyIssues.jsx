@@ -1,7 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { use, useEffect, useState } from 'react';
+import { data, Link } from 'react-router';
+import { AuthContext } from '../../context/AuthContext/AuthContext';
 
 const MyIssues = () => {
+    const {user} = use(AuthContext);
+    const [issues, setIssues] = useState([]);
+
+   
+    useEffect(() => {
+        if (user?.email) {
+            fetch(`http://localhost:3000/all-issues?email=${user.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    setIssues(data);
+                });
+        }
+    }, [user?.email]);
+   
+
     return (
         <div>
            <div className="overflow-x-auto">
@@ -20,19 +37,39 @@ const MyIssues = () => {
                 </thead>
                 <tbody>
                     {/* row 1 */}
-                    <tr>
-                        <th>1</th>
-                        <td>Cy Ganderton</td>
-                        <td>Quality Control Specialist</td>
-                        <td>Blue</td>
-                        <td>Blue</td>
-                        <td>Blue</td>
-                        <td>
-                            <Link to="/see-details" className='btn btn-primary mr-3'>See Details</Link>
-                            <Link to="/edit" className='btn btn-success mr-3'>Edit</Link>
-                            <Link className='btn bg-red-500'>Delete</Link>
-                        </td>
-                    </tr>
+                    {
+                            issues.map((issue, index) => (
+                                <tr key={issue._id}>
+                                    <th>{index + 1}</th>
+                                    <td>
+                                        <img src={issue.image} className="w-16 h-16 rounded" />
+                                    </td>
+                                    <td>{issue.title}</td>
+                                    <td>{issue.category}</td>
+                                    <td>{issue.location}</td>
+                                    <td>{issue.amount}</td>
+                                    <td>
+                                        <Link
+                                            to={`/see-details/${issue._id}`}
+                                            className='btn btn-primary mr-3'
+                                        >
+                                            See Details
+                                        </Link>
+
+                                        <Link
+                                            to={`/edit-issue/${issue._id}`}
+                                            className='btn btn-success mr-3'
+                                        >
+                                            Edit
+                                        </Link>
+
+                                        <button className='btn bg-red-500'>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        }
 
                 </tbody>
             </table>

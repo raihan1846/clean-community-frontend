@@ -62,7 +62,7 @@ const router = createBrowserRouter([
         Component: AddIssue
       },
       {
-        path: 'see-details',
+        path: '/see-details/:id',
         Component: IssueDetails
       },
       {
