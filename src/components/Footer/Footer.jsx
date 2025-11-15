@@ -7,14 +7,10 @@ const Footer = () => {
   
           {/* Logo + Description */}
           <div className="flex-1">
-            <img
-              src="https://via.placeholder.com/50"
-              alt="Logo"
-              className="w-12 h-12 rounded mb-3"
-            />
-            <h2 className="text-xl font-bold">YourSiteName</h2>
+           
+            <h2 className="text-3xl font-bold">Clean Community</h2>
             <p className="max-w-xs mt-2">
-              YourSiteName provides high-quality services and solutions to help you grow your business.
+              Clean Community provides high-quality services and solutions to help you grow your business.
             </p>
             <p className="mt-4 text-sm">
               © {new Date().getFullYear()} YourSiteName. All rights reserved.
@@ -23,7 +19,8 @@ const Footer = () => {
   
           {/* Useful Links */}
           <div className="flex-1">
-            <h6 className="text-lg font-semibold mb-3">Useful Links</h6>
+            <h6 className="text-lg font-semibold mb-3"></h6>
+            <br />
             <ul className="flex flex-col gap-2">
               <li><a className="link link-hover">Home</a></li>
               <li><a className="link link-hover">About Us</a></li>
@@ -34,7 +31,8 @@ const Footer = () => {
   
           {/* Resources */}
           <div className="flex-1">
-            <h6 className="text-lg font-semibold mb-3">Resources</h6>
+            <h6 className="text-lg font-semibold mb-3"></h6>
+            <br />
             <ul className="flex flex-col gap-2">
               <li><a className="link link-hover">Blog</a></li>
               <li><a className="link link-hover">FAQs</a></li>

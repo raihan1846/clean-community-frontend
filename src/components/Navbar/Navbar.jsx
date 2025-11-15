@@ -1,17 +1,39 @@
-import React from 'react';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
+import { auth } from '../../firebase/firebase.init';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
-    const links = <>
-        <li><NavLink to="/">Home</NavLink></li>
-         <li><NavLink to="/all-issues">All Issues</NavLink></li>
-         <li><NavLink to="/my-issues">My Issues</NavLink></li>
-         <li><NavLink to="/my-contribution">My Contribution</NavLink></li>
-         <li><NavLink to="/login">Login</NavLink></li>
-         <li><NavLink to="/register">Register</NavLink></li>
-    </>
-    return (
-      <div className="navbar bg-base-100 shadow-sm">
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+    });
+    return () => unsubscribe;
+  }, [])
+  const handleLogOut = e => {
+    signOut(auth).then(() => {
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Signed Out",
+        showConfirmButton: false,
+        timer: 1200,
+      });
+    })
+  }
+  const links = <>
+    <li><NavLink to="/">Home</NavLink></li>
+    <li><NavLink to="/all-issues">All Issues</NavLink></li>
+    <li><NavLink to="/my-issues">My Issues</NavLink></li>
+    <li><NavLink to="/my-contribution">My Contribution</NavLink></li>
+    {!user && <li><NavLink to="/login">Login</NavLink></li>}
+    {!user && <li><NavLink to="/register">Register</NavLink></li>}
+  </>
+  return (
+    <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -20,31 +42,31 @@ const Navbar = () => {
             </svg>
           </div>
           <ul tabIndex="-1" className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-             {
+            {
               links
-             }
+            }
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">Clean Community</a>
       </div>
-    
+
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-         {
-          links
-         }
+          {
+            links
+          }
         </ul>
       </div>
-    
+
       <div className="navbar-end">
-    
+
         {/* Avatar Dropdown Added Here */}
         <div className="dropdown dropdown-end ml-2">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src={user?.photoURL || "https://i.ibb.co/MBtjqXQ/no-user.png"}
               />
             </div>
           </div>
@@ -55,17 +77,17 @@ const Navbar = () => {
             <li>
               <a className="justify-between">
                 Profile
-                <span className="badge">New</span>
+                <span className="badge">{user?.displayName}</span>
               </a>
             </li>
             <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
+            <li><a onClick={handleLogOut}>Logout</a></li>
           </ul>
         </div>
       </div>
     </div>
-    
-    );
+
+  );
 };
 
 export default Navbar;
