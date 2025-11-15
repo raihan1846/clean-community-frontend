@@ -64,41 +64,7 @@ const handleGoogleSignIn = async () => {
         setLoading(false);
     }
 };
-    // const handleGoogleSignIn = e =>{
-    // signInWithPopup(auth, provider)
-    // .then(result=>{
-    //  setUser(result.user)
-    // }).catch(error=>{
-
-    // })
-    // }
-    // const handleLogin = e =>{
-    //     e.preventDefault();
-    //     const email = e.target.email.value;
-    //     const password = e.target.password.value;
-    //     // console.log(email,password);
-
-    //     signInWithEmailAndPassword(auth,email,password)
-    //     .then((result) =>{
-    //         console.log(result);
-    //         Swal.fire({
-    //             position: "top-center",
-    //             icon: "success",
-    //             title: "SuccessFully Loged In",
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //           });
-    //     }).catch(error=>{
-    //         Swal.fire({
-    //             icon: "error",
-    //             title: "Oops...",
-    //             text: "Something went wrong!",
-    //             footer: '<a href="#">Why do I have this issue?</a>'
-    //           });
-              
-    //     })
-
-    // }
+    
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-base-200 to-base-300 px-4">
             <div className="card w-full max-w-sm bg-base-100 shadow-xl border border-base-300">
