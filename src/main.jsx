@@ -52,11 +52,15 @@ const router = createBrowserRouter([
       },
       {
         path: 'my-issues',
-        Component: MyIssues
+        element:<PrivateRoute>
+          <MyIssues></MyIssues>
+        </PrivateRoute>
       },
       {
         path: 'my-contribution',
-        Component: MyContribution
+        element:<PrivateRoute>
+        <MyContribution></MyContribution>
+      </PrivateRoute>
       },
       {
         path: 'add-issue',
@@ -69,7 +73,9 @@ const router = createBrowserRouter([
       },
       {
         path: 'see-details/:id',
-        Component: IssueDetails
+        element:<PrivateRoute>
+          <IssueDetails></IssueDetails>
+        </PrivateRoute> 
       },
       {
         path: 'profile',

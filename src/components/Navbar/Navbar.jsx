@@ -29,9 +29,10 @@ const handleLogOut = e => {
   }
   const links = <>
     <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="/all-issues">All Issues</NavLink></li>
-    <li><NavLink to="/my-issues">My Issues</NavLink></li>
-    <li><NavLink to="/my-contribution">My Contribution</NavLink></li>
+    <li><NavLink to="/all-issues">Issues</NavLink></li>
+   {user && <li><NavLink to="/add-issue">Add Issues</NavLink></li>}
+   {user && <li><NavLink to="/my-issues">My Issues</NavLink></li>}
+    {user && <li><NavLink to="/my-contribution">My Contribution</NavLink></li>}
     {!user && <li><NavLink to="/login">Login</NavLink></li>}
     {!user && <li><NavLink to="/register">Register</NavLink></li>}
   </>
