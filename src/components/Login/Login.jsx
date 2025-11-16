@@ -42,10 +42,50 @@ const Login = () => {
 };
 
 // Google login
+// const handleGoogleSignIn = async () => {
+//     setLoading(true);
+//     try {
+//         const result = await signInWithGoogle();
+//         Swal.fire({
+//             position: "top-center",
+//             icon: "success",
+//             title: "Successfully Logged In with Google",
+//             showConfirmButton: false,
+//             timer: 1500
+//         });
+//         navigate(location.state || '/'); 
+//     } catch (error) {
+//         Swal.fire({
+//             icon: "error",
+//             title: "Google Sign-In Failed",
+//             text: error.message,
+//         });
+//     } finally {
+//         setLoading(false);
+//     }
+// };
 const handleGoogleSignIn = async () => {
     setLoading(true);
     try {
         const result = await signInWithGoogle();
+        const user = result.user;
+
+        // User data to save in DB
+        const savedUser = {
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+            createdAt: new Date(),
+            provider: "google"
+        };
+
+        // Send to MongoDB
+        await fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(savedUser)
+        });
+
         Swal.fire({
             position: "top-center",
             icon: "success",
@@ -53,7 +93,9 @@ const handleGoogleSignIn = async () => {
             showConfirmButton: false,
             timer: 1500
         });
-        navigate(location.state || '/'); 
+
+        navigate(location.state || '/');
+
     } catch (error) {
         Swal.fire({
             icon: "error",
@@ -64,6 +106,7 @@ const handleGoogleSignIn = async () => {
         setLoading(false);
     }
 };
+
     
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-base-200 to-base-300 px-4">

@@ -137,7 +137,7 @@ const AddIssue = () => {
                     </div>
 
                     {/* Status */}
-                    <div className="form-control col-span-1">
+                    {/* <div className="form-control col-span-1">
                         <label className="label font-semibold">Status</label>
                         <input
                             type="text"
@@ -145,7 +145,19 @@ const AddIssue = () => {
                             value="Ongoing"
                             className="input input-bordered bg-gray-100 rounded-xl"
                         />
+                    </div> */}
+                    {/* Status */}
+                    <div className="form-control col-span-1">
+                        <label className="label font-semibold">Status</label>
+                        <select className="select select-bordered rounded-xl" name='status'>
+                            <option disabled>Select a category</option>
+                            <option selected>Ongoing</option>
+                            <option>In Progress</option>
+                            <option>Resolved</option>
+                            <option>Rejected</option>
+                        </select>
                     </div>
+
 
                     {/* Date */}
                     <div className="form-control col-span-1">
@@ -154,7 +166,6 @@ const AddIssue = () => {
                             type="text"
                             name='date'
                             value={new Date().toLocaleDateString()}
-                            readOnly
                             className="input input-bordered bg-gray-100 rounded-xl"
                         />
                     </div>

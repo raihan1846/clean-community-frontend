@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
 
 const UpdateIssue = () => {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
 
@@ -39,12 +39,12 @@ const UpdateIssue = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedIssue)
         })
-        .then(res => res.json())
-        .then(data => {
-            Swal.fire('Updated!', 'Issue updated successfully.', 'success');
-            navigate('/my-issues'); 
-        })
-        .catch(err => console.error(err));
+            .then(res => res.json())
+            .then(data => {
+                Swal.fire('Updated!', 'Issue updated successfully.', 'success');
+                navigate('/my-issues');
+            })
+            .catch(err => console.error(err));
     };
 
     if (!issue) return <div>Loading...</div>;
@@ -140,7 +140,7 @@ const UpdateIssue = () => {
                     </div>
 
                     {/* Status */}
-                    <div className="form-control col-span-1">
+                    {/* <div className="form-control col-span-1">
                         <label className="label font-semibold">Status</label>
                         <input
                             type="text"
@@ -148,6 +148,18 @@ const UpdateIssue = () => {
                             className="input input-bordered rounded-xl"
                             defaultValue={issue.status}
                         />
+                    </div> */}
+
+                    {/* Status */}
+                    <div className="form-control col-span-1">
+                        <label className="label font-semibold">Status</label>
+                        <select className="select select-bordered rounded-xl" name='status' defaultValue={issue.status}>
+                            <option disabled>Select a category</option>
+                            <option>Ongoing</option>
+                            <option>In Progress</option>
+                            <option>Resolved</option>
+                            <option>Rejected</option>
+                        </select>
                     </div>
 
                     {/* Date */}
