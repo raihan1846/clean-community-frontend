@@ -153,6 +153,7 @@ const AddIssue = () => {
                             <option disabled>Select a category</option>
                             <option selected>Ongoing</option>
                             <option>In Progress</option>
+                            <option>Pending</option>
                             <option>Resolved</option>
                             <option>Rejected</option>
                         </select>

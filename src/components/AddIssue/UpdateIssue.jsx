@@ -158,6 +158,7 @@ const UpdateIssue = () => {
                             <option>Ongoing</option>
                             <option>In Progress</option>
                             <option>Resolved</option>
+                            <option>Pending</option>
                             <option>Rejected</option>
                         </select>
                     </div>
