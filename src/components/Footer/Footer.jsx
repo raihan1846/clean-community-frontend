@@ -1,9 +1,11 @@
 import React from 'react';
+import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-200 text-base-content p-10">
-        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-10">
+        <footer className="bg-blue-300 text-base-content p-10">
+        <div className="flex w-12/13 mx-auto flex-col md:flex-row md:justify-between md:items-start gap-10">
   
           {/* Logo + Description */}
           <div className="flex-1">
@@ -40,6 +42,7 @@ const Footer = () => {
               <li><a className="link link-hover">Privacy Policy</a></li>
             </ul>
           </div>
+           
   
         </div>
       </footer>

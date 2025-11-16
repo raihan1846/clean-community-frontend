@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router';
 import { auth } from '../../firebase/firebase.init';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
+import { DarkModeContext } from '../../context/DarkModContext/DarkModeContext';
 
 const Navbar = () => {
   // const [user, setUser] = useState(null);
@@ -15,7 +16,9 @@ const Navbar = () => {
   //   return () => unsubscribe;
   // }, [])
   
-  const {user, signOutUser} = use(AuthContext);
+ const {user, signOutUser} = use(AuthContext);
+ const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
+
 const handleLogOut = e => {
   signOutUser().then(() => {
       Swal.fire({
@@ -37,7 +40,7 @@ const handleLogOut = e => {
     {!user && <li><NavLink to="/register">Register</NavLink></li>}
   </>
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -84,7 +87,10 @@ const handleLogOut = e => {
                 <span className="badge">{user?.displayName}</span>
               </Link>
             </li>}
-            <li><a>Settings</a></li>
+            <li><button className="btn btn-sm" onClick={toggleDarkMode}>
+              {darkMode ? "Light Mode" : "Dark Mode"}
+            </button>
+            </li>
             { user ? <li><a className='btn' onClick={handleLogOut}>Logout</a></li> : <Link className='btn' to="/login">Login</Link>}
           </ul>
         </div>

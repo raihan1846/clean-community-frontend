@@ -78,7 +78,7 @@ const MyIssues = () => {
                                     <td>{issue.title}</td>
                                     <td>{issue.category}</td>
                                     <td>{issue.location}</td>
-                                    <td>{issue.amount}</td>
+                                    <td>${issue.amount}</td>
                                     <td>
                                         <Link
                                             to={`/see-details/${issue._id}`}

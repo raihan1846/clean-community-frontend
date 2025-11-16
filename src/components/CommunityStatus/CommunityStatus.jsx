@@ -10,7 +10,7 @@ const CommunityStatus = () => {
             .then(res => res.json())
             .then(data => setUserCount(data.count));
     }, []);
-    
+
     useEffect(() => {
         fetch('http://localhost:3000/issues-status-count')
             .then(res => res.json())
@@ -18,7 +18,7 @@ const CommunityStatus = () => {
             .catch(err => console.error(err));
     }, []);
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center bg-blue-500 p-12 mt-20">
+        <div className="grid grid-cols-1 shadow bg-gradient-to-r from-blue-500 to-green-700 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center bg-blue-500 p-12 mt-20 rounded-xl">
             <div>
                 <h2 className="text-2xl font-bold">{userCount}</h2>
                 <p>Registered Users</p>

@@ -157,7 +157,7 @@ const Register = () => {
                 <a className="link link-primary link-hover text-sm">Forgot password?</a>
               </div>
 
-              <button className="btn btn-neutral w-full mt-2">Register</button>
+              <button className="btn btn-primary w-full mt-2">Register</button>
             </fieldset>
           </form>
 

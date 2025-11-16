@@ -3,8 +3,8 @@ import { FaHandsHelping } from "react-icons/fa";
 
 const Volunteer = () => {
     return (
-        <div className="py-20 px-6 md:px-16">
-        <div className="rounded-2xl bg-gradient-to-r from-green-500 to-green-700 p-10 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="py-2 px-6 md:px-16">
+        <div className="rounded-2xl bg-gradient-to-r from-green-500 to-blue-700 p-10 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-10">
   
           {/* Left Text */}
           <div className="space-y-4 max-w-xl">
@@ -18,7 +18,7 @@ const Volunteer = () => {
               events. Together, we can make our city greener, cleaner & healthier.
             </p>
   
-            <button className="btn bg-white text-green-700 hover:bg-gray-100 font-semibold mt-4 px-6 py-3 rounded-lg text-lg shadow-md">
+            <button className="btn bg-blue-500 text-white-700 hover:bg-blue-400 font-semibold mt-4 px-6 py-3 rounded-lg text-lg shadow-md">
               Become a Volunteer
             </button>
           </div>

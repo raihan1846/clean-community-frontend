@@ -20,11 +20,13 @@ import AuthProvider from './context/AuthProvider/AuthProvider';
 import PrivateRoute from './Routes/PrivateRoute';
 import Profile from './components/Profile/Profile';
 import UpdateIssue from './components/AddIssue/UpdateIssue';
+import Error from './components/Error/Error'; 
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
+    errorElement: <Error></Error>,
     children: [
       {
         index: true,

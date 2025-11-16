@@ -146,7 +146,7 @@ const handleGoogleSignIn = async () => {
                             </a>
                         </div>
 
-                        <button className="btn btn-neutral w-full mt-2">
+                        <button className="btn btn-primary w-full mt-2">
                             Login
                         </button>
                     </fieldset>
