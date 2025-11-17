@@ -61,7 +61,7 @@ const AddIssue = () => {
                 <form onSubmit={handleSubmitIssue} className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                     {/* Issue Title */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2 md:col-span-1 lg:col-span-2">
                         <label className="label font-semibold">Issue Title</label>
                         <input
                             type="text"
@@ -71,7 +71,7 @@ const AddIssue = () => {
                         />
                     </div>
                     {/* Email */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2 md:col-span-1 lg:col-span-2">
                         <label className="label font-semibold">Email</label>
                         <input
                             type="email"
@@ -84,7 +84,7 @@ const AddIssue = () => {
                     </div>
 
                     {/* Category */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2 md:col-span-1 lg:col-span-2">
                         <label className="label font-semibold">Category</label>
                         <select className="select select-bordered rounded-xl" name='category'>
                             <option disabled selected>Select a category</option>
@@ -129,7 +129,7 @@ const AddIssue = () => {
                     </div>
 
                     {/* Suggested Budget */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2 md:col-span-1 lg:col-span-2">
                         <label className="label font-semibold">Suggested Fix Budget (Amount)</label>
                         <input
                             type="number"
@@ -150,7 +150,7 @@ const AddIssue = () => {
                         />
                     </div> */}
                     {/* Status */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2 md:col-span-1 lg:col-span-2">
                         <label className="label font-semibold">Status</label>
                         <select className="select select-bordered rounded-xl" name='status'>
                             <option disabled>Select a category</option>
@@ -164,7 +164,7 @@ const AddIssue = () => {
 
 
                     {/* Date */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2 md:col-span-1 lg:col-span-2">
                         <label className="label font-semibold">Date</label>
                         <input
                             type="text"
