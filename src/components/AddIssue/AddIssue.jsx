@@ -32,7 +32,7 @@ const AddIssue = () => {
             date,
             email,
         };
-        fetch('http://localhost:3000/all-issues', {
+        fetch('https://clean-community.vercel.app/all-issues', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

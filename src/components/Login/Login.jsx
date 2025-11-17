@@ -83,7 +83,7 @@ const handleGoogleSignIn = async () => {
         };
 
         // Send to MongoDB
-        await fetch("http://localhost:3000/users", {
+        await fetch("https://clean-community.vercel.app/users", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(savedUser)

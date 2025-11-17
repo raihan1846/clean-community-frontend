@@ -15,7 +15,7 @@ const MyIssues = () => {
     useEffect(() => {
         setLoading(true);
         if (user?.email) {
-            fetch(`http://localhost:3000/all-issues?email=${user.email}`)
+            fetch(`https://clean-community.vercel.app/all-issues?email=${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
@@ -36,7 +36,7 @@ const MyIssues = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/all-issues/${id}`, {
+                fetch(`https://clean-community.vercel.app/all-issues/${id}`, {
                     method: 'DELETE'
                 })
                 .then(res => res.json())

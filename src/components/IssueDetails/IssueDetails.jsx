@@ -15,7 +15,7 @@ const IssueDetails = () => {
 
     // Fetch issue
     useEffect(() => {
-        fetch(`http://localhost:3000/all-issues/${id}`)
+        fetch(`https://clean-community.vercel.app/all-issues/${id}`)
             .then(res => res.json())
             .then(data => setIssue(data))
             .catch(err => console.error(err));
@@ -24,7 +24,7 @@ const IssueDetails = () => {
     // Fetch contributions for this issue
     useEffect(() => {
         if (!issue) return;
-        fetch('http://localhost:3000/all-contribution')
+        fetch('https://clean-community.vercel.app/all-contribution')
             .then(res => res.json())
             .then(data => {
                 const filtered = data.filter(c => c.issueId === issue._id);
@@ -52,7 +52,7 @@ const IssueDetails = () => {
             phone: e.target.phoneNo.value,
         };
 
-        fetch('http://localhost:3000/all-contribution', {
+        fetch('https://clean-community.vercel.app/all-contribution', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(newContribution)
@@ -141,7 +141,7 @@ const IssueDetails = () => {
                 <div className="mb-10">
                     <div className="flex justify-between items-center mb-2">
                         <p className="font-semibold text-lg">Total Collected</p>
-                        <p className="text-xl font-bold text-green-700">₹₹{contributions.reduce((sum, c) => sum + Number(c.amount || 0), 0)}</p>
+                        <p className="text-xl font-bold text-green-700">${contributions.reduce((sum, c) => sum + Number(c.amount || 0), 0)}</p>
                     </div>
 
                     <div className="h-3 w-full bg-gray-300 rounded-full">
@@ -174,7 +174,7 @@ const IssueDetails = () => {
                             <tr>
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Amount (₹)</th>
+                                <th>Amount ($)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -184,7 +184,7 @@ const IssueDetails = () => {
                                     <img src="https://via.placeholder.com/50" className="w-12 h-12 rounded-full" alt="User" />
                                 </td>
                                 <td className="font-semibold">{c.contributorName}</td>
-                                <td className="font-bold">₹{c.amount}</td>
+                                <td className="font-bold">${c.amount}</td>
                             </tr>
                         ))}
 

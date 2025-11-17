@@ -6,9 +6,10 @@ import { Link } from 'react-router';
 const RecentComplain = () => {
     const [latestIssues, setLatestIssues] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:3000/latest-issues')  
+        fetch('https://clean-community.vercel.app/latest-issues')  
             .then(res => res.json())
-            .then(data => setLatestIssues(data))
+            .then(data => setLatestIssues(data)
+        )
             .catch(err => console.error(err));
     }, []);
     return (

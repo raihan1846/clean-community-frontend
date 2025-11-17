@@ -22,7 +22,7 @@ const MyContribution = () => {
             try {
                 setLoading(true);
 
-                const contribRes = await fetch('http://localhost:3000/all-contribution');
+                const contribRes = await fetch('https://clean-community.vercel.app/all-contribution');
                 const allContributions = await contribRes.json();
 
                 const myContribs = allContributions.filter(c => c.email === user.email);
@@ -30,7 +30,7 @@ const MyContribution = () => {
                 const issueIds = [...new Set(myContribs.map(c => c.issueId))];
 
                 const issuesPromises = issueIds.map(id =>
-                    fetch(`http://localhost:3000/all-issues/${id}`).then(res => res.json())
+                    fetch(`https://clean-community.vercel.app/all-issues/${id}`).then(res => res.json())
                 );
                 const issuesData = await Promise.all(issuesPromises);
 
@@ -62,7 +62,7 @@ const MyContribution = () => {
             confirmButtonText: "Yes, delete it!"
         }).then(result => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/all-contribution/${id}`, {
+                fetch(`https://clean-community.vercel.app/all-contribution/${id}`, {
                     method: 'DELETE'
                 })
                 .then(res => res.json())

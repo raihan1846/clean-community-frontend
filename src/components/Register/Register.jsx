@@ -42,7 +42,7 @@ const Register = () => {
     }
     const newUser = {name, email, password, photoURL};
     
-    fetch('http://localhost:3000/users', {
+    fetch('https://clean-community.vercel.app/users', {
       method: 'POST',
       headers: {
         'content-type' : 'application/json'
@@ -100,7 +100,7 @@ const Register = () => {
         };
 
         // Send to MongoDB
-        await fetch("http://localhost:3000/users", {
+        await fetch("https://clean-community.vercel.app/users", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(savedUser)

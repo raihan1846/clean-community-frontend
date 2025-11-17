@@ -15,7 +15,7 @@ const UpdateIssue = () => {
 
     // fetch issue by id
     useEffect(() => {
-        fetch(`http://localhost:3000/all-issues/${id}`)
+        fetch(`https://clean-community.vercel.app/all-issues/${id}`)
             .then(res => res.json())
             .then(data => {
                 setIssue(data);
@@ -37,7 +37,7 @@ const UpdateIssue = () => {
             email: user?.email
         };
 
-        fetch(`http://localhost:3000/all-issues/${id}`, {
+        fetch(`https://clean-community.vercel.app/all-issues/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedIssue)

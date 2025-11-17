@@ -1,18 +1,17 @@
 import React, { use, useEffect, useState } from 'react';
-import { AuthContext } from '../../context/AuthContext/AuthContext';
 
 const CommunityStatus = () => {
     const [userCount, setUserCount] = useState(0);
     const [statusCounts, setStatusCounts] = useState({});
 
     useEffect(() => {
-        fetch("http://localhost:3000/user-count")
+        fetch("https://clean-community.vercel.app/user-count")
             .then(res => res.json())
             .then(data => setUserCount(data.count));
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost:3000/issues-status-count')
+        fetch('https://clean-community.vercel.app/issues-status-count')
             .then(res => res.json())
             .then(data => setStatusCounts(data))
             .catch(err => console.error(err));

@@ -15,7 +15,7 @@ const UpdateContribution = () => {
 
     
     useEffect(() => {
-        fetch(`http://localhost:3000/all-issues/${issueId}`)
+        fetch(`https://clean-community.vercel.app/all-issues/${issueId}`)
             .then(res => res.json())
             .then(data => {
                 if (!data || data.error) {
@@ -33,7 +33,7 @@ const UpdateContribution = () => {
 
     useEffect(() => {
         if (!issue) return;
-        fetch('http://localhost:3000/all-contribution')
+        fetch('https://clean-community.vercel.app/all-contribution')
             .then(res => res.json())
             .then(data => {
                 const filtered = data.filter(c => c.issueId === issue._id);
@@ -44,7 +44,7 @@ const UpdateContribution = () => {
     useEffect(() => {
         if (!user || !issue) return;
 
-        fetch(`http://localhost:3000/my-contribution/${issueId}?email=${user.email}`)
+        fetch(`https://clean-community.vercel.app/my-contribution/${issueId}?email=${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setUserContribution(data);
@@ -71,7 +71,7 @@ const UpdateContribution = () => {
         };
 
         try {
-            const res = await fetch(`http://localhost:3000/all-contribution/${userContribution._id}`, {
+            const res = await fetch(`https://clean-community.vercel.app/all-contribution/${userContribution._id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updatedData)
