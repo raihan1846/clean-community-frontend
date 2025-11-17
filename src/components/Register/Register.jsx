@@ -3,14 +3,28 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import { updateProfile } from 'firebase/auth';
+import useDocumentTitle from '../useDocumentTitle/useDocumentTitle';
 
 const Register = () => {
+  useDocumentTitle("Register");
+
   const { createUser , signInWithGoogle} = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordValid, setPasswordValid] = useState(true);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
+    // Check password validity live
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+
+    // Validation regex
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    setPasswordValid(passwordRegex.test(value));
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -18,7 +32,14 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const photoURL = e.target.photoURL.value;
-
+    if (!passwordValid) {
+      Swal.fire({
+        icon: "error",
+        title: "Weak Password",
+        text: "Password must be at least 6 characters long and include both uppercase and lowercase letters.",
+      });
+      return;
+    }
     const newUser = {name, email, password, photoURL};
     
     fetch('http://localhost:3000/users', {
@@ -35,7 +56,6 @@ const Register = () => {
 
     createUser(email, password)
       .then(result => {
-        // update displayName & photoURL
         return updateProfile(result.user, { displayName: name, photoURL });
       })
       .then(() => {
@@ -46,6 +66,7 @@ const Register = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate('/');
         e.target.reset();
       })
       .catch(error => {
@@ -140,17 +161,31 @@ const Register = () => {
                   <span className="label-text font-medium">Password</span>
                 </label>
                 <div className="relative">
-                  <input
+                  {/* <input
                     type={showPassword ? 'text' : 'password'}
                     className="input input-bordered w-full"
                     placeholder="Enter your password"
                     name="password"
+                    required
+                  /> */}
+                    <input
+                    type={showPassword ? 'text' : 'password'}
+                    className={`input input-bordered w-full ${passwordValid ? "" : "border-red-500"}`}
+                    placeholder="Enter your password"
+                    name="password"
+                    value={password}
+                    onChange={handlePasswordChange}
                     required
                   />
                   <button className="absolute right-2 top-1/2 transform -translate-y-1/2 btn btn-sm" onClick={handleTogglePassword}>
                     {showPassword ? 'Hide' : 'Show'}
                   </button>
                 </div>
+                {!passwordValid && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Password must be at least 6 characters, and include uppercase & lowercase letters.
+                  </p>
+                )}
               </div>
 
               <div className="flex justify-end">

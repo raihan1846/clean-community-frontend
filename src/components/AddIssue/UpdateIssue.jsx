@@ -2,8 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
+import useDocumentTitle from '../useDocumentTitle/useDocumentTitle';
 
 const UpdateIssue = () => {
+    useDocumentTitle("Update Issue");
+
     const { id } = useParams();
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);

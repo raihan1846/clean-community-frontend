@@ -19,7 +19,7 @@ const Volunteer = () => {
             </p>
   
             <button className="btn bg-blue-500 text-white-700 hover:bg-blue-400 font-semibold mt-4 px-6 py-3 rounded-lg text-lg shadow-md">
-              Become a Volunteer
+            Join as Volunteer
             </button>
           </div>
   

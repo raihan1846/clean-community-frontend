@@ -1,6 +1,5 @@
-// tailwind.config.js
 module.exports = {
-    darkMode: 'class', // এটি যোগ করুন
+    darkMode: 'class', 
     content: [
       "./src/**/*.{js,jsx,ts,tsx}",
     ],

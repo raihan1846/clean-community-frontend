@@ -21,6 +21,7 @@ import PrivateRoute from './Routes/PrivateRoute';
 import Profile from './components/Profile/Profile';
 import UpdateIssue from './components/AddIssue/UpdateIssue';
 import Error from './components/Error/Error'; 
+import UpdateContribution from './components/MyContribution/UpdateContribution';
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,11 @@ const router = createBrowserRouter([
         element:<PrivateRoute>
         <MyContribution></MyContribution>
       </PrivateRoute>
+      },
+      ,
+      {
+        path: 'update-contribution/:id',
+        Component: UpdateContribution
       },
       {
         path: 'add-issue',

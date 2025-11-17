@@ -4,8 +4,11 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { auth } from "../../firebase/firebase.init";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
+import useDocumentTitle from "../useDocumentTitle/useDocumentTitle";
 
 const Login = () => {
+    useDocumentTitle("Login");
+
     const { signInUser, signInWithGoogle } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();

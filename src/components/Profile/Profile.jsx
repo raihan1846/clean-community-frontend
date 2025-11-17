@@ -2,19 +2,20 @@ import React, { use, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
+import useDocumentTitle from '../useDocumentTitle/useDocumentTitle';
 
 const Profile = () => {
+    useDocumentTitle("Update Profile");
+
   const { user, updateUser, loading } = use(AuthContext);
   const navigate = useNavigate();
 
-  // local form state (pre-filled with current user data)
   const [form, setForm] = useState({
     name: '',
     email: '',
     photoURL: '',
   });
 
-  // fill the form when the user is loaded
   useEffect(() => {
     if (user) {
       setForm({
@@ -36,7 +37,6 @@ const Profile = () => {
     if (!user) return;
 
     try {
-      // only send fields that changed (optional)
       const updatedData = {};
       if (form.name !== user.displayName) updatedData.displayName = form.name;
       if (form.photoURL !== user.photoURL) updatedData.photoURL = form.photoURL;
@@ -55,11 +55,9 @@ const Profile = () => {
         icon: "success",
         draggable: true
       });
-    //   alert('Profile updated successfully!');
-      navigate('/'); // or wherever you want after success
+      navigate('/');
     } catch (err) {
       console.error(err);
-    //   alert('Failed to update profile: ' + err.message);
       Swal.fire({
         icon: "error",
         title: "Oops...Failed to update profile",
@@ -137,7 +135,7 @@ const Profile = () => {
                 />
               </div>
 
-              <button type="submit" className="btn btn-neutral w-full mt-4">
+              <button type="submit" className="btn btn-primary w-full mt-4">
                 Update Profile
               </button>
             </fieldset>

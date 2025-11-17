@@ -54,7 +54,7 @@ const handleLogOut = e => {
             }
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Clean Community</a>
+        <Link className="btn btn-ghost text-xl" to="/">Clean Community</Link>
       </div>
 
       <div className="navbar-center hidden lg:flex">

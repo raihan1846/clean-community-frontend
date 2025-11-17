@@ -2,8 +2,11 @@ import React, { use, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 import Swal from "sweetalert2";
+import useDocumentTitle from "../useDocumentTitle/useDocumentTitle";
 
 const IssueDetails = () => {
+    useDocumentTitle("Issue Details");
+
     const { user } = use(AuthContext);
     const { id } = useParams();
     const [issue, setIssue] = useState(null);

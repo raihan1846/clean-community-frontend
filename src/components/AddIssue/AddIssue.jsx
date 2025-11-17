@@ -1,8 +1,11 @@
 import React, { use, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
+import useDocumentTitle from '../useDocumentTitle/useDocumentTitle';
 
 const AddIssue = () => {
+    useDocumentTitle("Add Issue");
+
     const { user } = use(AuthContext);
 
     const handleSubmitIssue = (e) => {

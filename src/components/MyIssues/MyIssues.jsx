@@ -2,19 +2,25 @@ import React, { use, useEffect, useState } from 'react';
 import { data, Link } from 'react-router';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
+import useDocumentTitle from '../useDocumentTitle/useDocumentTitle';
 
 const MyIssues = () => {
+    useDocumentTitle("My Issue");
+
     const { user } = use(AuthContext);
     const [issues, setIssues] = useState([]);
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
+        setLoading(true);
         if (user?.email) {
             fetch(`http://localhost:3000/all-issues?email=${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
                     setIssues(data);
+                    setLoading(false);
                 });
         }
     }, [user?.email]);
@@ -49,9 +55,14 @@ const MyIssues = () => {
         });
     }
     
-
     return (
         <div>
+            {
+            loading ? (
+                <div className="flex justify-center py-10">
+                    <span className="loading loading-spinner loading-xl"></span>
+                </div>
+            ):(
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -105,6 +116,8 @@ const MyIssues = () => {
                     </tbody>
                 </table>
             </div>
+            )
+                    }
             <div className='flex justify-center item-center m-4'>
                 <Link className="btn btn-active btn-primary" to="/add-issue">Add Issue</Link>
             </div>
