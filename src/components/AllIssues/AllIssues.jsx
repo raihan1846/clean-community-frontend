@@ -13,13 +13,13 @@ const AllIssues = () => {
     const [statusFilter, setStatusFilter] = useState('');
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        setLoading(true);
+        // setLoading(true);
         fetch('https://clean-community.vercel.app/all-issues')
             .then(res => res.json())
             .then(data => {
                 setIssues(data);
                 setFilteredIssues(data);
-                setLoading(false);
+                // setLoading(true);
             }).catch(err => {
                 console.error(err);
                 setLoading(false);
@@ -27,13 +27,14 @@ const AllIssues = () => {
     }, []);
 
     useEffect(() => {
-        setLoading(true);
         let temp = [...issues];
         if (categoryFilter) {
             temp = temp.filter(issue => issue.category === categoryFilter);
+            setLoading(true);
         }
         if (statusFilter) {
             temp = temp.filter(issue => issue.status === statusFilter);
+        setLoading(true);
         }
         setTimeout(() => {
             setFilteredIssues(temp);

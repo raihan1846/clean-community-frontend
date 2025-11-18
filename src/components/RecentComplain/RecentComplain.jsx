@@ -79,7 +79,7 @@
 import React from "react";
 import { BsAlarmFill } from "react-icons/bs";
 import { AiFillBank } from "react-icons/ai";
-import { Link } from "react-router"; // react-router-dom হলে dom, না হলে router
+import { Link } from "react-router"; 
 
 const RecentComplain = ({ latestIssues = [] }) => {
   return (

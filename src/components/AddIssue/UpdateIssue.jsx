@@ -62,7 +62,7 @@ const UpdateIssue = () => {
 
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Issue Title */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2">
                         <label className="label font-semibold">Issue Title</label>
                         <input
                             type="text"
@@ -73,7 +73,7 @@ const UpdateIssue = () => {
                     </div>
 
                     {/* Email */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2">
                         <label className="label font-semibold">Email</label>
                         <input
                             type="email"
@@ -85,7 +85,7 @@ const UpdateIssue = () => {
                     </div>
 
                     {/* Category */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2">
                         <label className="label font-semibold">Category</label>
                         <select
                             className="select select-bordered rounded-xl"
@@ -132,7 +132,7 @@ const UpdateIssue = () => {
                     </div>
 
                     {/* Suggested Budget */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2">
                         <label className="label font-semibold">Suggested Fix Budget (Amount)</label>
                         <input
                             type="number"
@@ -154,7 +154,7 @@ const UpdateIssue = () => {
                     </div> */}
 
                     {/* Status */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2">
                         <label className="label font-semibold">Status</label>
                         <select className="select select-bordered rounded-xl" name='status' defaultValue={issue.status}>
                             <option disabled>Select a category</option>
@@ -167,7 +167,7 @@ const UpdateIssue = () => {
                     </div>
 
                     {/* Date */}
-                    <div className="form-control col-span-1">
+                    <div className="form-control col-span-2">
                         <label className="label font-semibold">Date</label>
                         <input
                             type="text"
