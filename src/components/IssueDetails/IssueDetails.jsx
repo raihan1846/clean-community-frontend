@@ -181,7 +181,7 @@ const IssueDetails = () => {
                         {contributions.map((c, idx) => (
                             <tr key={idx}>
                                 <td>
-                                    <img src={user.image} className="w-12 h-12 rounded-full" alt="User" />
+                                    <img src={user?.photoURL || "https://i.ibb.co/MBtjqXQ/no-user.png"} className="w-12 h-12 rounded-full" alt="User" />
                                 </td>
                                 <td className="font-semibold">{c.contributorName}</td>
                                 <td className="font-bold">${c.amount}</td>
