@@ -11,6 +11,7 @@ const AllIssues = () => {
     const [filteredIssues, setFilteredIssues] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         // setLoading(true);
@@ -34,13 +35,24 @@ const AllIssues = () => {
         }
         if (statusFilter) {
             temp = temp.filter(issue => issue.status === statusFilter);
-        setLoading(true);
+            setLoading(true);
         }
+        if (searchTerm.trim() !== "") {
+            temp = temp.filter(issue =>
+                issue.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                issue.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                issue.location.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setLoading(true);
+
+        }
+
+        // setLoading(true);
         setTimeout(() => {
             setFilteredIssues(temp);
             setLoading(false);
         }, 300);
-    }, [categoryFilter, statusFilter, issues]);
+    }, [categoryFilter, statusFilter, searchTerm, issues]);
     return (
         <div className="p-6 max-w-7xl mx-auto">
 
@@ -70,11 +82,20 @@ const AllIssues = () => {
                     <option value="Rejected">Rejected</option>
                 </select>
 
+
+                <input
+                    type="text"
+                    placeholder="Search issues..."
+                    className="input input-bordered w-80"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
                 <button
                     className="btn btn-outline btn-sm"
                     onClick={() => {
                         setCategoryFilter('');
                         setStatusFilter('');
+                        setSearchTerm('');
                     }}
                 >
                     Clear Filters

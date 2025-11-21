@@ -136,7 +136,7 @@ const UpdateContribution = () => {
                     </div>
 
                     <div className="mt-6">
-                        <label className="label font-bold">Message</label>
+                        <label className="label font-bold">Additional Info</label>
                         <textarea name="additionalInfo" rows="4" defaultValue={userContribution.description || ""} className="textarea textarea-bordered w-full"></textarea>
                     </div>
 

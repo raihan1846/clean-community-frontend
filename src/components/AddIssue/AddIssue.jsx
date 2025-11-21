@@ -45,6 +45,8 @@ const AddIssue = () => {
                     title: "Successfully Added",
                     icon: "success",
                     draggable: true
+                  }).then(()=>{
+                    window.location.reload();
                   });
             })
     }
